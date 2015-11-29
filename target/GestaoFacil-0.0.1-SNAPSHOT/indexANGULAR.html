@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html ng-app="gestaofacil">
+<head>
+
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="css/datepicker.css">
+	<link rel="stylesheet" href="assets/datepicker/css/datepicker.css" media="screen"/>
+	
+	<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<script type="text/javascript" src="js/angular-locale_pt-br.js"></script>
+	<script type="text/javascript" src="assets/datepicker/js/bootstrap-datepicker.js"></script>
+	<script type="text/javascript" src="assets/datepicker/js/bootstrap-datepicker.pt-BR.js"></script>
+	<script type="text/javascript" src="js/controllers/lancamentoController.js"></script>
+	<script type="text/javascript" src="js/services/lancamentoAPIService.js"></script>
+	<script type="text/javascript" src="js/filters/filterFormatarPago.js"></script>
+	<script type="text/javascript" src="js/filters/filterPlanoDeContas.js"></script>
+	<script type="text/javascript" src="js/filters/filterFormatarData.js"></script>
+
+	<meta charset="UTF-8">
+	<title>Gestão Fácil</title>
+</head>
+<body ng-controller="lancamentoController as controller">
+<div class="container">
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation" class="active"><a href="index.html">Home</a></li>
+            <li role="presentation"><a href="graficos.html">Gráficos</a></li>
+            <li role="presentation"><a href="cadastro.html">Cadastro</a></li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">Gestão Fácil</h3>
+      </div>
+      <div class="jumbotron">
+	
+       <div class="row">
+			<h1 class="col-md-8">Gestão Fácil</h1>
+			<div class="col-md-4 bg-info text-justify">
+	       		<h4>Saldo Ano anterior: </h4>
+	       		<h4>Total de receitas no mês: <span style="float: right;"> {{totalReceitas | currency}}</span></h4>
+	       		<h4>Total de despesas no mês: <span style="float: right;"> {{totalDespesas | currency}}</span></h4>
+	       		<h4>Resultado do mês:<span style="float: right;"> {{total | currency}}</span></h4>
+			</div>
+       </div>
+       <!--  <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p> -->
+      
+	<form name="formListaLancamentos">
+	    <div class="col-md-2" style="margin-top: 20px;" >
+	    	<input type="text" id="mes" class="form-control datepicker" 
+	    		name="mes" ng-required="true"
+	    		data-date-format="mm/yyyy" 
+	    		placeholder="Mês" 
+	    		ng-change="listarLancamentos(mes)"
+	    		ng-model="mes" />
+			<div style="color: red; " ng-hide="formListaLancamentos.$valid"><h6>Favor preencher o mês</h6></div>
+		</div>	
+	    <div class="col-md-10" style="margin-top: 20px;">
+	    	<input class="form-control col-md-8" ng-model="criteria" placeholder="Digite para filtrar" />
+	   	</div>
+	</form>
+   	<br />
+  	<br />
+  	<br />	
+  	<br />
+	<table class="table table-striped" style="margin-top: 30px;">
+		<tr>
+			<th>Dia</th>
+			<th>Classificação</th>
+			<th>Item</th>
+			<th>Plano de Contas</th>
+			<th>Valor</th>
+			<th>Status</th>
+			<th></th>
+			<th></th>
+		</tr>
+		<tr ng-repeat="lancamento in lancamentos | filter:criteria">
+			<td>{{lancamento.data | formatarData}}</td>
+			<td>{{lancamento.classificacao.descricao}}</td>
+			<td>{{lancamento.item}}</td>
+			<td>{{lancamento.planodecontas.descricao}}</td>	
+			<td	ng-bind="lancamento.valor | currency"></td>
+			<td>{{lancamento.pago | formatarPago}}</td>
+			<td><button class="btn btn-primary">Pagar</button></td>
+			<td><button class="btn btn-danger">Excluir</button></td>
+		</tr>
+	</table>
+    <footer class="footer">
+      <p>&copy; @rodrigoats Company 2015</p>
+    </footer>
+    </div>
+    
+    <script type="text/javascript">
+		$(function(){
+		 var options = new Array();
+		 options['language'] = 'pt-BR';
+
+		 var optionsMes = new Array();
+		 optionsMes['format'] = 'mm-yyyy';
+		 optionsMes['startView'] = 'months';
+		 optionsMes['minViewMode'] = 'months';
+		 
+		 $('#dataLancamento').datepicker(options);
+		 $('#mes').datepicker(optionsMes);
+		})
+		
+	</script>
+</body>
+</html> 

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html ng-app="gestaofacil">
+<head>
+
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="css/datepicker.css">
+<link rel="stylesheet" href="assets/datepicker/css/datepicker.css"
+	media="screen" />
+
+<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/angular.min.js"></script>
+<script type="text/javascript" src="js/angular-locale_pt-br.js"></script>
+<script type="text/javascript"
+	src="assets/datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript"
+	src="assets/datepicker/js/bootstrap-datepicker.pt-BR.js"></script>
+<script type="text/javascript"
+	src="js/controllers/lancamentoController.js"></script>
+<script type="text/javascript" src="js/services/lancamentoAPIService.js"></script>
+<script type="text/javascript" src="js/filters/filterFormatarPago.js"></script>
+<script type="text/javascript" src="js/filters/filterPlanoDeContas.js"></script>
+<script type="text/javascript" src="js/filters/filterFormatarData.js"></script>
+
+<meta charset="UTF-8">
+<title>Gestão Fácil</title>
+</head>
+<body ng-controller="lancamentoController as controller">
+	<div class="container">
+		<div class="header clearfix">
+			<nav>
+				<ul class="nav nav-pills pull-right">
+				  	<li role="presentation" class="active"><a href="indexANGULAR.html">Home</a></li>
+		            <li role="presentation"><a href="graficos.html">Gráficos</a></li>
+		            <li role="presentation"><a href="cadastro.html">Cadastro</a></li>
+				</ul>
+			</nav>
+			<h3 class="text-muted">Gestão Fácil</h3>
+		</div>
+		<form name="formLancamento" style="margin-top: 30px;">
+			<fieldset>
+				<legend>Cadastro de Lançamentos</legend>
+			<div class="row">
+				<div class="col-md-4">
+					<label>Data *</label> <input type="text" id="dataLancamento"
+						class="form-control datepicker" name="data"
+						data-date-format="dd/mm/yyyy" ng-model="lancamento.data"
+						ng-required="true" />
+				</div>
+				<div class="col-md-4">
+					<label>Classificação *</label> <select
+						ng-model="lancamento.classificacao" name="classificacao"
+						class="form-control" ng-required="true"
+						ng-options="classificacao.descricao for classificacao in classificacoes">
+						<option value="">Selecione...</option>
+					</select>
+				</div>
+				<div class="col-md-4">
+					<label>Plano de Contas *</label> <select
+						ng-model="lancamento.planodecontas" class="form-control"
+						name="planodecontas" ng-required="true"
+						ng-disabled="formLancamento.classificacao.$invalid"
+						ng-options="planodecontas.descricao for planodecontas in planosdecontas |filter: {classificacao: {descricao : lancamento.classificacao.descricao}}">
+						<option value="">Selecione...</option>
+					</select>
+				</div>
+			</div>
+			<div class="row" style="margin-top: 20px;">
+				<div class="col-md-4">
+					<label>Item *</label> <input type="text" ng-model="lancamento.item"
+						nome="item" ng-required="true" class="form-control" />
+				</div>
+				<div class="col-md-4">
+					<label>Valor *</label> <input type="text"
+						ng-model="lancamento.valor" name="valor" ng-required="true"
+						class="form-control" />
+				</div>
+				<div class="col-md-4">
+					<label>Pago</label> <input type="checkbox"
+						ng-model="lancamento.pago" name="pago" class="checkbox"
+						value="Pago" />
+				</div>
+			</div>
+			<div style="color: red;" ng-hide="formLancamento.$valid">
+				<h6>Favor preencher os campos obrigatórios (*)</h6>
+			</div>
+			<div style="margin-top: 20px;">
+				<button class="btn btn-primary"
+					ng-click="adicionarLancamento(lancamento)"
+					ng-disabled="formLancamento.$invalid">Adicionar</button>
+			</div>
+		</fieldset>
+		</form>
+	</div>
+	 <script type="text/javascript">
+		$(function(){
+		 var options = new Array();
+		 options['language'] = 'pt-BR';
+
+		 $('#dataLancamento').datepicker(options);
+		})
+		
+	</script>
+</body>
+</html>
