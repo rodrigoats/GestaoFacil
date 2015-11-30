@@ -13,5 +13,5 @@ public interface LancamentoRepo<T> {
 	List<Lancamento> lancamentoByPeriodo(Date dtInicio, Date dtFim);
 	Lancamento lancamentoById(Lancamento lancamento);
 	void removeLancamento(Lancamento lancamento);
-	String getDonutReceitasGraph();
+	List<Lancamento> getDonutReceitasGraph();
 }

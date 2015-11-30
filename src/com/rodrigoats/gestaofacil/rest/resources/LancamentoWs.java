@@ -32,6 +32,7 @@ public class LancamentoWs {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response listLancamentos() {
 
+		
 		Gson gson = new Gson();
 		List<Lancamento> lances = lancamentoRepo.getLancamentos();
 

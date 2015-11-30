@@ -17,8 +17,8 @@ public class SpringMongoConfig extends AbstractMongoConfiguration{
 
 	private static final String user = "admin";
 	private static final char [] pass = "BQaa4EHYd8vU".toCharArray();
-//	private static final String mongodb = "gestaofacil";
-	private static final String mongodb = "gestaofacildb";
+	private static final String mongodb = "gestaofacil";
+//	private static final String mongodb = "gestaofacildb";
 	
 	@Override
 	protected String getDatabaseName() {
@@ -28,13 +28,13 @@ public class SpringMongoConfig extends AbstractMongoConfiguration{
 	@Override
 	@Bean
 	public Mongo mongo() throws Exception {
-//		List<ServerAddress>seeds = new ArrayList<ServerAddress>();
-//		List<MongoCredential> credenciais = new ArrayList<MongoCredential>();
-//		seeds.add(new ServerAddress("127.13.34.2"));
-//		MongoCredential credential = MongoCredential.createCredential(user, mongodb, pass);
-//		credenciais.add(credential);
-//		return new MongoClient(seeds, credenciais);
-		return new MongoClient("127.0.0.1");
+		List<ServerAddress>seeds = new ArrayList<ServerAddress>();
+		List<MongoCredential> credenciais = new ArrayList<MongoCredential>();
+		seeds.add(new ServerAddress("127.13.34.2"));
+		MongoCredential credential = MongoCredential.createCredential(user, mongodb, pass);
+		credenciais.add(credential);
+		return new MongoClient(seeds, credenciais);
+//		return new MongoClient("127.0.0.1");
 	}
 
 }

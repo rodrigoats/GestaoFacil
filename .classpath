@@ -13,7 +13,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="var" path="M2_REPO/org/jboss/resteasy/resteasy-jaxrs/3.0.11.Final/resteasy-jaxrs-3.0.11.Final.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/jboss/resteasy/resteasy-jaxrs/3.0.11.Final/resteasy-jaxrs-3.0.11.Final.jar" sourcepath="/home/rodrigo/.m2/repository/org/jboss/resteasy/resteasy-jaxrs/3.0.11.Final/resteasy-jaxrs-3.0.11.Final-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/jboss/resteasy/jaxrs-api/3.0.11.Final/jaxrs-api-3.0.11.Final.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/jboss/spec/javax/annotation/jboss-annotations-api_1.1_spec/1.0.1.Final/jboss-annotations-api_1.1_spec-1.0.1.Final.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/apache/httpcomponents/httpclient/4.2.6/httpclient-4.2.6.jar"/>

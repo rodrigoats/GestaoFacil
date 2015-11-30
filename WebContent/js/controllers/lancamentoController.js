@@ -54,7 +54,7 @@ gestaofacil.controller('lancamentoController', function lancamentoController(
 					$scope.classeAcumulado = $scope.total > 0 ? "panel-green": "panel-red";
 					
 					graficoService.getGraficoRecDesp($scope.arrReceitas, $scope.arrDespesas);
-					graficoService.getGraficoDonutReceitas($scope.lancamentos);
+					graficoService.getGraficoDonutReceitas();
 					
 					
 					 var contasReceber = lancamentoAPI.getTotalContasReceberPorMes($scope.lancamentos);

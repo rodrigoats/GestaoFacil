@@ -4,31 +4,41 @@
 
 angular.module("gestaofacil").factory("lancamentoAPI", function($http){
 	var _getLancamentos = function(){
-//		return $http.get("http://gestaofacil-rodrigoats.rhcloud.com//GestaoFacil/ws/lancamento/");
-		return $http.get("http://localhost:8080/GestaoFacil/ws/lancamento/");
+		return $http.get("http://gestaofacil-rodrigoats.rhcloud.com/GestaoFacil/ws/lancamento/");
+//		return $http.get("http://localhost:8080/GestaoFacil/ws/lancamento/");
 	}
 	
 	var _getLancamentosByMonth = function(mes){
-		return $http.get("http://localhost:8080/GestaoFacil/ws/lancamento/" + mes);
+		return $http.get("http://gestaofacil-rodrigoats.rhcloud.com/GestaoFacil/ws/lancamento/" + mes);
+//		return $http.get("http://localhost:8080/GestaoFacil/ws/lancamento/" + mes);
 	}
 	var _getClassificacao = function(){
-		return $http.get("http://localhost:8080/GestaoFacil/ws/classificacao");
+		return $http.get("http://gestaofacil-rodrigoats.rhcloud.com/GestaoFacil/ws/classificacao");
+//		return $http.get("http://localhost:8080/GestaoFacil/ws/classificacao");
+
 	}
 	var _getPlanoDeContas = function(){
-		return $http.get("http://localhost:8080/GestaoFacil/ws/planodecontas");
+		return $http.get("http://gestaofacil-rodrigoats.rhcloud.com/GestaoFacil/ws/planodecontas");
+//		return $http.get("http://localhost:8080/GestaoFacil/ws/planodecontas");
+
 	}
 	
 	var _saveLancamento = function(lancamento){
-		return $http.put("http://localhost:8080/GestaoFacil/ws/lancamento", lancamento);
+		return $http.put("http://gestaofacil-rodrigoats.rhcloud.com/GestaoFacil/ws/lancamento", lancamento);
+//		return $http.put("http://localhost:8080/GestaoFacil/ws/lancamento", lancamento);
+
 	}
 	
 	var _editLancamento = function(lancamento){
-		return $http.post("http://localhost:8080/GestaoFacil/ws/lancamento", lancamento);
+		return $http.post("http://gestaofacil-rodrigoats.rhcloud.com/GestaoFacil/ws/lancamento", lancamento);
+//		return $http.post("http://localhost:8080/GestaoFacil/ws/lancamento", lancamento);
+
 	}
 	var _removeLancamento = function(lancamento){
 		
-		return $http.delete("http://localhost:8080/GestaoFacil/ws/lancamento/"+lancamento.id);
-	}
+		return $http.delete("http://gestaofacil-rodrigoats.rhcloud.com/GestaoFacil/ws/lancamento/"+lancamento.id);
+//		return $http.delete("http://localhost:8080/GestaoFacil/ws/lancamento/"+lancamento.id);
+}
 	
 	var _getTotalReceitasPorMes = function(lancamentos){
 	

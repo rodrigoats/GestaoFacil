@@ -6,14 +6,13 @@ import java.util.List;
 
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
-import org.springframework.data.mongodb.core.aggregation.AggregationOperation;
-import org.springframework.data.mongodb.core.aggregation.MatchOperation;
+import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.core.aggregation.TypedAggregation;
-import org.springframework.data.mongodb.core.mapreduce.GroupBy;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
+import com.google.gson.Gson;
 import com.rodrigoats.gestaofacil.model.connection.MongoConnection;
 import com.rodrigoats.gestaofacil.model.entities.Lancamento;
 import com.rodrigoats.gestaofacil.model.repo.LancamentoRepo;
@@ -63,9 +62,14 @@ public class LancamentoDao implements LancamentoRepo<Lancamento>{
 	}
 	
 	@Override
-	public String getDonutReceitasGraph(){
+	public List<Lancamento> getDonutReceitasGraph(){
 	
-		return "";
+		TypedAggregation<Lancamento> agg = Aggregation.newAggregation(Lancamento.class,
+				Aggregation.group("planodecontas.descricao").sum("valor").as("valor")
+				);
+		AggregationResults<Lancamento> results =  mongoOperations.aggregate(agg, Lancamento.class, Lancamento.class);
+		List<Lancamento> resultList = results.getMappedResults();
+		return resultList;
 	}
 	
 }

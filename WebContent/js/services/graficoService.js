@@ -1,10 +1,9 @@
 /**
  * 
  */
-angular.module('gestaofacil').factory('graficoService', function(){
+angular.module('gestaofacil').factory('graficoService', function($http){
 	
 	var _getGraficoRecDesp = function(arrReceitas, arrDespesas){
-		console.log("Grafico RecDesp");
 		
 		Morris.Bar({
 	        element: 'morris-bar-chart',
@@ -66,31 +65,25 @@ angular.module('gestaofacil').factory('graficoService', function(){
 	    });
 	}
 	
-	var _getGraficoDonutReceitas = function(lancamentos){
+	var _getGraficoDonutReceitas = function(){
+
 		
-		var receitas = [];
-		for(var int = 0; int < lancamentos.length; int++){
-			if(lancamentos[int].classificacao.descricao == 'RECEITA'){
-					receitas[int] = {'planodecontas' : lancamentos[int].planodecontas.descricao, 'valor' : lancamentos[int].valor};
+//		$http.get('http://localhost:8080/GestaoFacil/ws/grafico/donutReceitas').success(function(data){
+		$http.get('http://gestaofacil-rodrigoats.rhcloud.com/GestaoFacil/ws/grafico/donutReceitas').success(function(data){
+			
+			receitas = [];
+			
+			for (var int = 0; int < data.length; int++) {
+				
+				receitas[int] = {label : data[int].id, value : data[int].valor}
 			}
-		}
-		
-		console.log(receitas);
-		
-		Morris.Donut({
-	        element: 'morris-donut-chart',
-	        data: [{
-	            label: "Download Sales",
-	            value: 12
-	        }, {
-	            label: "In-Store Sales",
-	            value: 30
-	        }, {
-	            label: "Mail-Order Sales",
-	            value: 20
-	        }],
-	        resize: true
-	    });
+			
+			Morris.Donut({
+				element: 'morris-donut-chart',
+				data: receitas,
+				resize: true
+			});
+		});
 	}
 	
 	
