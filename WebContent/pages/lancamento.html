@@ -1,0 +1,239 @@
+<!DOCTYPE html >
+<html lang="pt-BR" ng-app="gestaofacil" ng-controller="cadastroController as controller">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>{{title}} - Marcolopolo Consultoria</title>
+
+    <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+    <link href="../dist/css/timeline.css" rel="stylesheet">
+    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- DataTables CSS -->
+    <link href="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../css/jquery-ui.min.css">
+	<link rel="stylesheet" href="../css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="../css/datepicker.css">
+	<link rel="stylesheet" href="../assets/datepicker/css/datepicker.css" media="screen"/>
+	
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+    <div id="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">{{title}}</a>
+            </div>
+            <!-- /.navbar-header -->
+
+            <ul class="nav navbar-top-links navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> Perfil</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Configurações</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu" >
+                        <li>
+                            <a href="index.html" class="page-scroll"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="index.html#graficos" class="page-scroll"><i class="fa fa-bar-chart-o fa-fw"></i> Gráficos </a>
+                        </li>
+                        <li>
+                            <a href="index.html#lista" class="page-scroll"><i class="fa fa-table fa-fw"></i> Lançamentos</a>
+                        </li>
+                        <li>
+                            <a href=""><i class="fa fa-edit fa-fw page-scroll"></i> Cadastro <span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+								<li>
+                                    <a href="lancamento.html" class="page-scroll">Lançamentos</a>
+                                </li>
+                                <li>
+                                    <a href="classificacao.html">Classificação</a>
+                                </li>
+                                <li>
+                                    <a href="planodecontas.html">Plano de Contas</a>
+                                </li>
+                                <li>
+                                    <a href="usuario.html">Usuário</a>
+                                </li>
+                            </ul>
+                        </li>
+                         <li class="sidebar-search">
+                        	<div class="input-group custom-search-form" style="z-index: 99999;">
+                        		<input type="text" id="mesAno"  class="form-control"
+	            					placeholder="Filtro por mês..."
+	            					ng-change="mostrarMes(mes)"
+	                				data-date-format="mm/yyyy" ng-model="mes"/> 
+                				 <span class="input-group-btn">
+	                                <button class="btn btn-default" type="button">
+	                                    <i class="fa fa-calendar"></i>
+	                                </button>
+                                </span>
+               				</div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+        <div id="page-wrapper">
+            <div id="cadastro" style="margin-top: 31px;">
+	            <div class="row">
+	                <div class="col-lg-12">
+	                    <h3 class="page-header">Lançamentos</h3>
+	                </div>
+	                <!-- /.col-lg-12 -->
+	            </div>
+           		<!-- /.row -->
+	            <div class="row">
+	                <div class="col-lg-12">
+	                    <div class="panel panel-default">
+	                        <div class="panel-heading">
+	                            Cadastro de Lançamentos
+	                        </div>
+	                        <div class="panel-body">
+	                            <form role="form" name="formLancamento" >
+	                            <div class="alert-info alert col-md-12" ng-hide="!ok">
+									<a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a>
+									<h6>Lançamento salvo com sucesso!</h6>
+								</div>
+	                            <div class="row">
+	                                <div class="col-lg-6">
+	                                        <div class="form-group">
+	                                            <label>Data *</label> 
+	                                            <input type="text" id="dataLancamento"
+																class="form-control datepicker" name="data"
+																data-date-format="dd/mm/yyyy" ng-model="lancamento.data"
+																ng-required="true" />
+	                                        </div>
+	                                        <div class="form-group">
+		                                        <label>Classificação *</label> 
+		                                        <select
+													ng-model="lancamento.classificacao" name="classificacao"
+													class="form-control" ng-required="true"
+													ng-options="classificacao.descricao for classificacao in classificacoes">
+													<option value="">Selecione...</option>
+												</select>
+	                                        </div>
+											<div class="form-group">
+												<label>Valor *</label>
+												<div class="input-group">
+		                                            <span class="input-group-addon">R$</span>
+		                                            <input type="text" class="form-control" ng-model="lancamento.valor" name="valor" ng-required="true">
+		                                            <span class="input-group-addon">.00</span>
+												</div>
+	                                        </div>
+	                                </div>
+	                                <!-- /.col-lg-6 (nested) -->
+	                                <div class="col-lg-6">
+	                                	<div class="form-group">
+	                                    	<label>Item *</label> 
+	                                        <input type="text" ng-model="lancamento.item"
+													nome="item" ng-required="true" class="form-control" />
+	                                    </div>
+	                                    <div class="form-group">
+		                                    <label>Plano de Contas *</label> 
+		                                    <select
+												ng-model="lancamento.planodecontas" class="form-control"
+												name="planodecontas" ng-required="true"
+												ng-disabled="formLancamento.classificacao.$invalid"
+												ng-options="planodecontas.descricao for planodecontas in planosdecontas |filter: {classificacao: {descricao : lancamento.classificacao.descricao}}">
+												<option value="">Selecione...</option>
+											</select>
+										</div>
+										<div class="form-group">
+											<label>Pago</label> 
+											<input type="checkbox"
+												ng-model="lancamento.pago" name="pago" class="checkbox"
+												value="Pago" />
+										</div>
+	                                </div>
+	                                <!-- /.col-lg-6 (nested) -->
+	                            </div>
+	                            <div style="color: red;" class="row col-lg-12" ng-hide="formLancamento.$valid">
+									<h6>Favor preencher os campos obrigatórios (*)</h6>
+								</div>
+                                <button class="btn btn-primary btn-block"
+										ng-click="adicionarLancamento(lancamento)"
+										ng-disabled="formLancamento.$invalid">Adicionar</button>
+	                            <!-- /.row (nested) -->
+	                            </form>
+	                        </div>
+	                        <!-- /.panel-body -->
+	                    </div>
+	                    <!-- /.panel -->
+	                </div>
+	                <!-- /.col-lg-12 -->
+           		</div>
+            </div>
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../js/jquery-ui.min.js"></script>
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+    <script src="../dist/js/sb-admin-2.js"></script>
+    
+    <script src="../bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+    
+	<script type="text/javascript" src="../js/angular.min.js"></script>
+	<script type="text/javascript" src="../js/angular-locale_pt-br.js"></script>
+	<script type="text/javascript" src="../js/angular-datatables.min.js"></script>
+	<script type="text/javascript" src="../assets/datepicker/js/bootstrap-datepicker.js"></script>
+	<script type="text/javascript" src="../assets/datepicker/js/bootstrap-datepicker.pt-BR.js"></script>
+	<script type="text/javascript" src="../js/controllers/cadastroController.js"></script>
+	<script type="text/javascript" src="../js/services/lancamentoAPIService.js"></script>
+	<script type="text/javascript" src="../js/services/graficoService.js"></script>
+	<script type="text/javascript" src="../js/filters/filterFormatarPago.js"></script>
+	<script type="text/javascript" src="../js/filters/filterPlanoDeContas.js"></script>
+	<script type="text/javascript" src="../js/filters/filterFormatarData.js"></script>
+	<script type="text/javascript" src="../js/filters/filterFormatarNumero.js"></script>
+</body>
+
+</html>

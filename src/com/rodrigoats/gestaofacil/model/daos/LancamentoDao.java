@@ -12,7 +12,6 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
-import com.google.gson.Gson;
 import com.rodrigoats.gestaofacil.model.connection.MongoConnection;
 import com.rodrigoats.gestaofacil.model.entities.Lancamento;
 import com.rodrigoats.gestaofacil.model.repo.LancamentoRepo;
@@ -65,6 +64,7 @@ public class LancamentoDao implements LancamentoRepo<Lancamento>{
 	public List<Lancamento> getDonutReceitasGraph(){
 	
 		TypedAggregation<Lancamento> agg = Aggregation.newAggregation(Lancamento.class,
+				Aggregation.match(Criteria.where("pago").is(true).andOperator(Criteria.where("classificacao.descricao").is("RECEITA"))),
 				Aggregation.group("planodecontas.descricao").sum("valor").as("valor")
 				);
 		AggregationResults<Lancamento> results =  mongoOperations.aggregate(agg, Lancamento.class, Lancamento.class);
